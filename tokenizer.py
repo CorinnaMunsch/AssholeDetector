@@ -5,8 +5,8 @@ import pandas as pd
 
 def load_data(param):
 
-    AITA_data = pd.read_csv(param + '.csv')
-    print(AITA_data.body)
+    AITA_data = pd.read_csv(param + ' posts.csv')
+    print(AITA_data.to_string())
     # data = []
     # # nm_comments = []
     # # stories = []
@@ -32,4 +32,4 @@ def load_data(param):
 
 
 if __name__ == '__main__':
-    load_data('posts')
+    load_data('Everyone Sucks')
