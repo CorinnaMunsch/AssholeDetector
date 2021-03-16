@@ -1,6 +1,3 @@
-days	POS=0.25
-a	POS=0.125
-a	NEG=0.25
 a fortiori	POS=0.25
 a good deal	POS=0.25
 a great deal	POS=0.375
@@ -12795,6 +12792,7 @@ daydreaming	NEG=0.25
 daylight vision	POS=0.125
 daylight vision	NEG=0.125
 daypro	NEG=0.25
+days	POS=0.25
 days	NEG=0.5
 daze	POS=0.125
 daze	NEG=0.25

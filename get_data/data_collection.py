@@ -1,3 +1,5 @@
+import datetime
+
 import praw
 import pandas as pd
 import re
@@ -11,12 +13,14 @@ def collect_data(param):
                          user_agent="my user agent")
 
     posts = []
+
     ml_subreddit = reddit.subreddit('AmItheAsshole')
-    for post in ml_subreddit.top(limit=200):
+    for post in ml_subreddit.top(limit=1000):
+        time = post.created
         if post.link_flair_text == param:
             posts.append(
-                [post.link_flair_text, post.title, post.score, post.id, post.num_comments, post.selftext])
-    posts = pd.DataFrame(posts, columns=['judgement', 'title', 'score', 'id', 'num_comments', 'body'])
+                [datetime.datetime.fromtimestamp(time), post.link_flair_text, post.score, post.id, post.num_comments, post.title, post.selftext])
+    posts = pd.DataFrame(posts, columns=['date', 'judgement', 'score', 'id', 'num_comments', 'title', 'body'])
 
     posts.replace("\n", '', regex=True, inplace=True)
     posts.replace("\r", '', regex=True, inplace=True)
@@ -26,50 +30,23 @@ def collect_data(param):
         r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)", '',
         regex=True, inplace=True)
 
-    sentence = posts.body
-    data_list = sentence.values.tolist()
+    print(posts)
 
-    with open(param + '2 posts.txt', 'a') as f:
-        for row in data_list:
-            f.write("%s\n" % row)
-    #return posts
+    posts.to_csv(path_or_buf=param + " posts with Date.csv", encoding="utf8")
 
-
-
-def tokenize():
-    f = open("Everyone Sucks2 posts.txt", "r")
-    lines = f.readlines()
-    print(lines)
-    data = []
-    for element in lines:
-        data.append(
-            element.lower().replace(', ', ' ').replace(': ', ' ').replace('. ', ' ').replace('! ', ' ')
-                .replace('? ', ' ').replace(".", '').replace('“', '').replace('”', '').replace("\n", '')
-                .replace("*", '').replace("(", '').replace(")", '').replace("/", ' ').replace("-", '').replace("?", '')
-                .replace("!", '').replace(':', '')
-                .replace("’s", ' is').replace("'s", ' is').replace("’re", ' are').replace("can’t", 'can not')
-                .replace("n't", ' not').replace("'m", ' am').replace("’m", ' am').replace("’d", ' would')
-                .replace("'d", ' would').replace("'ll", ' will').replace("’ve", ' have').replace("etc.", 'et cetera')
-                .replace("y’all", 'you all').replace("didn't", 'did not').replace("  ", ' ').replace("   ", ' ')
-
-        )
-    print(data)
-
-    si = [i.split(' ') for i in data]
-    print(si)
-
-    with open("tokenized_data/Everyone Sucks tokenized.txt", "w") as w:
-        for ele in si:
-            w.writelines('%s\n' % ele)
-
-
+    # sentence = posts.body
+    # print(sentence)
+    # data_list = sentence.values.tolist()
+    #
+    # with open(param + ' posts.txt', 'a') as f:
+    #     for row in data_list:
+    #         f.write("%s\n" % row)
 
 
 
 if __name__ == '__main__':
-    tokenize()
-    #collect_data('Not the A-hole')
-    #collect_data('Everyone Sucks')
-    #collect_data('Asshole')
+    collect_data('Not the A-hole')
+    collect_data('Everyone Sucks')
+    # collect_data('Asshole')
 
 

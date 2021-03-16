@@ -3,32 +3,32 @@ import annotations
 import pandas as pd
 
 
-hashtags = ['frauenquote', 'quotenfrau']
+tags = ['Everyone Sucks', 'Not the A-hole', 'Asshole']
 
-annotations = annotations.get_sentiments()
+annotations = annotations.get_mixed_annotations()
 # print(annotations)
 
 
-for element in hashtags:
+for element in tags:
     annotated_tokens = {}
-    tweets = tokenizer.indexTweets(element)
+    posts = tokenizer.tokenize(element)
     annotated_tweets = []
-    data = pd.read_csv("resources/" + element + ".csv")
-    dates = data.Date
+    data = pd.read_csv("get_data/" + element + " posts with Date.csv")
+    dates = data.date
     # print(element)
-    f = open("resources/" + element + ".txt", "a")
-    for (index, tweet) in enumerate(tweets):
+    f = open("get_data/" + element + ".txt", "a")
+    for (index, post) in enumerate(posts):
         # annotated_sentences = []
         tokens_counter = 0
-        tweet_score = 0
+        post_score = 0
         # print(tweet)
-        for sentence in tweet:
+        for sentence in post:
             # annotated_tokens = []
             sentence_score = 0
             sign = '+'
             for token in sentence:
                 if token.replace(' ', '') != '':
-                    if token in ['nicht', 'kein', 'keine', 'keines', 'keiner', 'keinsten', 'weder']:
+                    if token in ['not', 'none', 'neither']:
                         sign = '-'
                         # print(f"Sentence contains {token} change sign of sentiment")
                     for annotation in annotations:
@@ -44,11 +44,11 @@ for element in hashtags:
                                 sentence_score = sentence_score + float(annotation[1])
                             elif sign == '-':
                                 sentence_score = sentence_score - float(annotation[1])
-            tweet_score = tweet_score + sentence_score
+            post_score = post_score + sentence_score
             # annotated_sentences.append(annotated_tokens)
             # print(f" Sentence score: {sentence_score}.")
         try:
-            final_score = tweet_score/tokens_counter
+            final_score = post_score / tokens_counter
         except ZeroDivisionError:
             final_score = 0
         # print(f"Tweet score: {final_score}, number of annotated tokens:{tokens_counter}.")
@@ -58,8 +58,8 @@ for element in hashtags:
         f.write(str(final_score) + " " + str(dates[index].split(" ")[0]) + "\n")
         # f.write(str(final_score) + " " + str(dates[index]) + "\n")
     f.close()
-    print(len(annotated_tokens))
-
+    # print(len(annotated_tokens))
+    #
     updated_tokens = {token: counter for (token, counter) in annotated_tokens.items() if counter > 4}
     print(len(updated_tokens))
     f = open("resources/" + element + "_5.txt", "w")
