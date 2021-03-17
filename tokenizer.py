@@ -35,7 +35,7 @@ def tokenize(param):
         words = [t.split(' ') for j in sentences for t in j]
         #print(words[2:])
         tokenized_posts.append(words)
-    print(tokenized_posts)
+    # print(tokenized_posts)
     # with open("get_data/tokenized_data/" + param + " tokenized.txt", "w", encoding="utf8") as w:
     #     for ele in tokenized_posts:
     #         w.writelines('%s\n' % ele)

@@ -16,7 +16,7 @@ for element in tags:
     # data = pd.read_csv("get_data/" + element + " posts with Date.csv")
     # dates = data.date
     # print(element)
-    f = open("get_data/" + element + " sentiments.txt", "a")
+    f = open("get_data/" + element + " sentiments.txt", "w")
     for (index, post) in enumerate(posts):
         # annotated_sentences = []
         tokens_counter = 0
@@ -74,6 +74,21 @@ for element in tags:
     updated_tokens = {token: counter for (token, counter) in annotated_tokens.items() if counter > 6}
     print(len(updated_tokens))
     f = open("resources/" + element + "_7.txt", "w")
+    for token in updated_tokens.keys():
+        f.write(token + '\n')
+    updated_tokens = {token: counter for (token, counter) in annotated_tokens.items() if counter > 9}
+    print(len(updated_tokens))
+    f = open("resources/" + element + "_10.txt", "w")
+    for token in updated_tokens.keys():
+        f.write(token + '\n')
+    updated_tokens = {token: counter for (token, counter) in annotated_tokens.items() if counter > 14}
+    print(len(updated_tokens))
+    f = open("resources/" + element + "_15.txt", "w")
+    for token in updated_tokens.keys():
+        f.write(token + '\n')
+    updated_tokens = {token: counter for (token, counter) in annotated_tokens.items() if counter > 19}
+    print(len(updated_tokens))
+    f = open("resources/" + element + "_20.txt", "w")
     for token in updated_tokens.keys():
         f.write(token + '\n')
 
