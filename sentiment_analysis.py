@@ -3,7 +3,7 @@ import annotations
 import pandas as pd
 
 
-tags = ['Everyone Sucks', 'Not the A-hole', 'Asshole']
+tags = ['Everyone Sucks', 'Asshole'] #, 'Not the A-hole',
 
 annotations = annotations.get_mixed_annotations()
 # print(annotations)
@@ -13,10 +13,10 @@ for element in tags:
     annotated_tokens = {}
     posts = tokenizer.tokenize(element)
     annotated_tweets = []
-    data = pd.read_csv("get_data/" + element + " posts with Date.csv")
-    dates = data.date
+    # data = pd.read_csv("get_data/" + element + " posts with Date.csv")
+    # dates = data.date
     # print(element)
-    f = open("get_data/" + element + ".txt", "a")
+    f = open("get_data/" + element + " sentiments.txt", "a")
     for (index, post) in enumerate(posts):
         # annotated_sentences = []
         tokens_counter = 0
@@ -55,7 +55,8 @@ for element in tags:
         # annotated_tweets.append(annotated_sentences)
         # print(f"Index of tweet: {index}, Tweet score: {final_score}.")
         # print(dates[index])
-        f.write(str(final_score) + " " + str(dates[index].split(" ")[0]) + "\n")
+        f.write(str(final_score) + "\n")
+        # " " + str(dates[index].split(" ")[0]) +
         # f.write(str(final_score) + " " + str(dates[index]) + "\n")
     f.close()
     # print(len(annotated_tokens))

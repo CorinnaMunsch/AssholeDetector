@@ -26,17 +26,16 @@ def tokenize(param):
         )
     # print(data)
     tokenized_posts = []
-
-    data_string = ''.join(data)
-    submission_list = data_string.split("*")
-    # print(submission_list)
-    sentences = [i.split('.') for i in submission_list]
-    # print(sentences)
-    words = [t.split(' ') for j in sentences for t in j]
-    # print(words[1:])
-
-    tokenized_posts.append(words[1:])
-    # print(tokenized_posts)
+    for entry in data:
+        #data_string = ''.join(data)
+        submission_list = entry.split("*")
+        # print(submission_list)
+        sentences = [i.split('.') for i in submission_list]
+        # print(sentences)
+        words = [t.split(' ') for j in sentences for t in j]
+        #print(words[2:])
+        tokenized_posts.append(words)
+    print(tokenized_posts)
     # with open("get_data/tokenized_data/" + param + " tokenized.txt", "w", encoding="utf8") as w:
     #     for ele in tokenized_posts:
     #         w.writelines('%s\n' % ele)
@@ -48,6 +47,6 @@ def tokenize(param):
 
 
 if __name__ == '__main__':
-    tokenize('Not the A-hole')
+    # tokenize('Not the A-hole')
     tokenize('Everyone Sucks')
-    tokenize('Asshole')
+    # tokenize('Asshole')
