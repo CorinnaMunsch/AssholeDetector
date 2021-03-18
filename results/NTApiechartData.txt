@@ -1,0 +1,25 @@
+Entries in this list:
+745
+Score of 0.1 and higher:
+24
+Score between 0.1 & 0:
+542
+Score of 0:
+1
+Score between 0 & -0.1 :
+177
+Score of -0.1 and lower:
+1
+
+
+Score of 0.1 and higher:
+3.22
+Score between 0.1 & 0:
+72.75
+Score of 0:
+0.13
+Score between 0 & -0.1 :
+23.76
+Score of -0.1 and lower:
+0.13
+['3.22', '72.75', '0.13', '23.76', '0.13']

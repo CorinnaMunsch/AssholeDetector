@@ -1,7 +1,7 @@
-# import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
 # import matplotlib.colors
+import numpy as np
 
 
 def sp(param):
@@ -10,17 +10,19 @@ def sp(param):
         parsed = [line.split() for line in lines]
         y = [float(elem[0]) for elem in parsed]
 
-        dates = [elem[1] + " " + elem[2] for elem in parsed]
-        # print(dates)
-        new = [dt.datetime.strptime(elem, '%Y-%m-%d %H:%M:%S') for elem in dates]
-        # print(new)
-        x = [dt.datetime.strptime(elem, '%Y-%m-%d %H:%M:%S') for elem in dates]
+        # dates = [elem[1] + " " + elem[2] for elem in parsed]
+        # # print(dates)
+        # new = [dt.datetime.strptime(elem, '%Y-%m-%d %H:%M:%S') for elem in dates]
+        # # print(new)
+        x = np.random.rand(27)
+        # [dt.datetime.strptime(elem, '%Y-%m-%d %H:%M:%S') for elem in dates]
 
-    plt.scatter(x, y, marker='+', label='Tweet')
+    plt.scatter(y, x, marker='+', label='Posts')
     plt.title(param)
     plt.ylim(-1.0, 1.0)
-    plt.xlabel('Datum')
-    plt.ylabel('Bewertung')
+    plt.xlim(0, 27)
+    plt.xlabel('Post Number')
+    plt.ylabel('Sentiment Score')
 
     plt.show()
 
@@ -43,5 +45,5 @@ def sp(param):
 
 
 if __name__ == '__main__':
-    sp('frauenquote')
-    sp('quotenfrau')
+    sp('Everyone Sucks')
+    # sp('Asshole')

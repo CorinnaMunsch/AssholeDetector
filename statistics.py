@@ -10,6 +10,8 @@ def print_statistics(param):
     print(f"Mean: {np.mean(sentiments)}")
     print(f"Variance: {np.var(sentiments)}")
     print(f"Standard Deviation: {np.std(sentiments)}")
+    print(f"Highest Score: {np.amax(sentiments)}")
+    print(f"Lowest Score: {np.amin(sentiments)}")
 
 
 if __name__ == '__main__':
